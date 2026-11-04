@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en" class="no-js is-loading">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KANTON Field 42 — Swiss automatic watch</title>
+<meta name="description" content="Concept site of a Swiss field watch: live 3D model, exploded automatic movement, dial configurator.">
+<meta name="theme-color" content="#ebe7df">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300..700&family=Unbounded:wght@200..800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body>
+
+<div class="preloader" data-preloader aria-hidden="true">
+  <div class="preloader__mark"><i class="cross"></i><span>KANTON</span></div>
+  <div class="preloader__bar"><i data-pre-bar></i></div>
+  <div class="preloader__num" data-pre-num>00</div>
+</div>
+
+<svg width="0" height="0" class="defs" aria-hidden="true" focusable="false">
+  <defs><path id="seal-path" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1 -94 0"/></defs>
+</svg>
+
+<!-- Декор: кольцо-шкала под холстом, выноски и шкала скролла над ним -->
+<div class="ring" data-ring aria-hidden="true">
+  <svg viewBox="0 0 1000 1000" width="1000" height="1000"><g data-ring-scale></g><g data-ring-sec><circle class="ring__sec" cx="500" cy="10" r="7"/></g></svg>
+</div>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="callouts" data-callouts aria-hidden="true">
+  <svg class="callouts__svg" data-callouts-svg></svg>
+  <div class="callout" data-callout="crown"><b>Screw-down crown</b><span>Red cap, double gasket</span></div>
+  <div class="callout" data-callout="back"><b>Sapphire caseback</b><span>Watch the K-28 at work</span></div>
+  <div class="callout" data-callout="lug"><b>Curved lugs</b><span>Hand-polished bevels</span></div>
+</div>
+<div class="track" data-track aria-hidden="true">
+  <div class="track__ticks" data-track-ticks></div>
+  <div class="track__hand" data-track-hand><i></i><span data-track-num>01</span></div>
+</div>
+
+<header class="header" data-header>
+  <a class="logo" href="#top" data-scroll-to aria-label="KANTON, to the top"><i class="cross"></i><span>KANTON</span></a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#case" data-scroll-to>Case</a>
+    <a href="#calibre" data-scroll-to>Calibre</a>
+    <a href="#design" data-scroll-to>Design</a>
+    <a href="#straps" data-scroll-to>Straps</a>
+    <a href="#dial" data-scroll-to>Dial</a>
+  </nav>
+  <div class="header__clocks" aria-label="Local time">
+    <span>Baku <b data-clock="Asia/Baku">--:--</b></span>
+    <span>Zürich <b data-clock="Europe/Zurich">--:--</b></span>
+  </div>
+  <a class="btn btn--small" href="#reserve" data-scroll-to>Reserve</a>
+</header>
+
+<main id="top">
+
+  <!-- 1. Первый экран: огромная надпись, часы поверх -->
+  <section class="hero" data-pose="hero">
+    <div class="topo" data-topo aria-hidden="true"></div>
+    <p class="hero__coords" aria-hidden="true">46°36′N · 6°14′E — Le Sentier, Vallée de Joux</p>
+    <p class="hero__eyebrow" data-fade><span class="dot"></span>Swiss Made · Ref. K-4210 · Automatic</p>
+    <h1 class="hero__title" data-hero-title aria-label="Field 42">
+      <span class="hero__word">FIELD</span><span class="hero__word hero__word--num">42</span>
+    </h1>
+    <div class="hero__foot">
+      <p class="hero__lead" data-fade>A field watch from the Jura mountains. 42&nbsp;mm of steel, a red cross on the dial and three days of reserve on the wrist.</p>
+      <p class="hero__now" data-fade>The hands show real time: <b data-clock-local>--:--:--</b></p>
+      <a class="seal" href="#case" data-scroll-to data-fade aria-label="Scroll to the case">
+        <svg class="seal__text" viewBox="0 0 120 120" aria-hidden="true"><text><textPath href="#seal-path" textLength="292" lengthAdjust="spacing">SWISS MADE ✚ AUTOMATIC ✚ SINCE 1897 ✚</textPath></text></svg>
+        <i class="cross"></i>
+      </a>
+    </div>
+  </section>
+
+  <div class="marquee" data-marquee data-speed="38" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Swiss Made</span><i class="cross"></i><span class="is-outline">Automatic K-28</span><i class="cross"></i><span>42 mm steel</span><i class="cross"></i><span class="is-outline">100 m</span><i class="cross"></i><span>72 h reserve</span><i class="cross"></i><span class="is-outline">Vallée de Joux</span><i class="cross"></i>
+    </div>
+  </div>
+
+  <!-- 2. Профиль корпуса -->
+  <section class="profile" id="case" data-pose="profile">
+    <h2 class="giant" data-split>42MM</h2>
+    <div class="profile__body">
+      <p class="eyebrow"><i class="n">02</i>Steel case</p>
+      <p class="lead" data-reveal>Satin flanks, a polished bezel and a crown with a red cap. Thin enough for a cuff, solid enough for a mountain.</p>
+      <dl class="specs" data-reveal>
+        <div><dt>Diameter</dt><dd>42.0 mm</dd></div>
+        <div><dt>Thickness</dt><dd>11.4 mm</dd></div>
+        <div><dt>Lug to lug</dt><dd>49.5 mm</dd></div>
+        <div><dt>Water resistance</dt><dd>100 m</dd></div>
+        <div><dt>Crystal</dt><dd>Sapphire, front &amp; back</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 3. Механизм: тёмная секция, часы разворачиваются спиной и разлетаются на детали -->
+  <section class="calibre" id="calibre" data-pose="back,back,explode,explode">
+    <div class="calibre__stage">
+      <div class="calibre__mark" aria-hidden="true">K-28</div>
+      <div class="calibre__panel" data-panel="0">
+        <p class="eyebrow"><i class="n">03</i>Calibre K-28</p>
+        <h2 class="title" data-split>Mechanical<br>heart</h2>
+        <p class="lead">Turn it over. Through the sapphire caseback: the gold-toned rotor, Côtes de Genève on the bridges, blued screws and a balance beating four times a second.</p>
+      </div>
+      <div class="calibre__panel" data-panel="1">
+        <p class="eyebrow"><i class="n">03</i>Exploded view</p>
+        <h2 class="title">Automatic<br>movement</h2>
+        <ul class="stats">
+          <li><b data-count="168">0</b><span>components</span></li>
+          <li><b data-count="26">0</b><span>jewels</span></li>
+          <li><b data-count="28800" data-format="space">0</b><span>vibrations / hour</span></li>
+          <li><b data-count="72">0</b><span>hours of reserve</span></li>
+        </ul>
+      </div>
+      <div class="calibre__progress" aria-hidden="true"><i data-calibre-bar></i></div>
+    </div>
+  </section>
+
+  <!-- 4. Линии корпуса и браслет -->
+  <section class="contours" id="design" data-pose="contours">
+    <div class="stone stone--white" data-stone="white" aria-hidden="true"></div>
+    <div class="contours__body">
+      <p class="eyebrow"><i class="n">04</i>Design</p>
+      <h2 class="wide" data-split>Elegant<br>contours</h2>
+      <p class="lead" data-reveal>Every surface is finished by hand: mirror polish where light should catch, satin brushing where the watch meets the world.</p>
+      <ul class="features" data-reveal>
+        <li><b>01</b><span>Polished sloped bezel</span></li>
+        <li><b>02</b><span>Satin-brushed flanks and lugs</span></li>
+        <li><b>03</b><span>Three-link steel bracelet</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Ремешки меняются при прокрутке, фон — чёрный мрамор -->
+  <section class="straps" id="straps" data-pose="straps,straps2">
+    <div class="straps__stage">
+      <div class="stone stone--black" data-stone="black" aria-hidden="true"></div>
+      <div class="straps__body">
+        <p class="eyebrow"><i class="n">05</i>One watch · four straps</p>
+        <h2 class="title" data-split>Change<br>the mood</h2>
+        <p class="straps__count"><b data-strap-num>01</b> / 04</p>
+        <ol class="straps__list">
+          <li class="is-active" data-strap-item="0"><b>Steel</b><span>Three-link bracelet, polished centre links</span></li>
+          <li data-strap-item="1"><b>Leather</b><span>Cognac calfskin, hand-stitched in Le Sentier</span></li>
+          <li data-strap-item="2"><b>NATO</b><span>Red nylon with a white stripe, threads under the case</span></li>
+          <li data-strap-item="3"><b>Rubber</b><span>Black FKM with an embossed cross pattern</span></li>
+        </ol>
+      </div>
+      <div class="calibre__progress" aria-hidden="true"><i data-strap-bar></i></div>
+    </div>
+  </section>
+
+  <!-- 6. Конфигуратор циферблата и ремешка -->
+  <section class="dialsec" id="dial" data-pose="dial">
+    <div class="topo topo--alt" data-topo aria-hidden="true"></div>
+    <div class="dialsec__body">
+      <p class="eyebrow"><i class="n">06</i>Configure</p>
+      <h2 class="title" data-split>Make it<br>yours</h2>
+      <div class="swatches" role="radiogroup" aria-label="Dial colour">
+        <button type="button" class="swatch is-active" role="radio" aria-checked="true" data-dial="noir" style="--c:#16171a" aria-label="Noir"></button>
+        <button type="button" class="swatch" role="radio" aria-checked="false" data-dial="rouge" style="--c:#b81d1f" aria-label="Rouge"></button>
+        <button type="button" class="swatch" role="radio" aria-checked="false" data-dial="marine" style="--c:#1a2d58" aria-label="Marine"></button>
+        <button type="button" class="swatch" role="radio" aria-checked="false" data-dial="foret" style="--c:#3a4530" aria-label="Forêt"></button>
+        <button type="button" class="swatch" role="radio" aria-checked="false" data-dial="blanc" style="--c:#ecebe6" aria-label="Blanc"></button>
+      </div>
+      <div class="chips" role="radiogroup" aria-label="Strap">
+        <button type="button" class="chip" role="radio" aria-checked="false" data-strap="steel">Steel</button>
+        <button type="button" class="chip" role="radio" aria-checked="false" data-strap="leather">Leather</button>
+        <button type="button" class="chip" role="radio" aria-checked="false" data-strap="nato">NATO</button>
+        <button type="button" class="chip is-active" role="radio" aria-checked="true" data-strap="rubber">Rubber</button>
+      </div>
+      <p class="dial-name"><b data-dial-name>Noir</b><span data-dial-ref>Ref. K-4210.N</span></p>
+      <p class="muted" data-dial-note>Matte black with white numerals. The classic field look.</p>
+    </div>
+  </section>
+
+  <div class="tape" data-marquee="rev" data-speed="30" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Limited to 1 897 pieces</span><i class="cross cross--inv"></i><span>Free engraving</span><i class="cross cross--inv"></i><span>5-year warranty</span><i class="cross cross--inv"></i><span>Fitting in Baku</span><i class="cross cross--inv"></i>
+      <span>Limited to 1 897 pieces</span><i class="cross cross--inv"></i><span>Free engraving</span><i class="cross cross--inv"></i><span>5-year warranty</span><i class="cross cross--inv"></i><span>Fitting in Baku</span><i class="cross cross--inv"></i>
+    </div>
+  </div>
+
+  <!-- 7. Заявка -->
+  <section class="reserve" id="reserve" data-pose="reserve">
+    <div class="stone stone--white stone--soft" data-stone="white" aria-hidden="true"></div>
+    <div class="reserve__body">
+      <p class="eyebrow"><i class="n">07</i>Boutique · Baku</p>
+      <h2 class="title" data-split>Wear it<br>this week</h2>
+      <div class="price-row">
+        <p class="price"><span>CHF</span> 1 490 <small>≈ 3 150 ₼</small></p>
+        <a class="seal seal--price" href="#top" data-scroll-to aria-label="Back to the top">
+          <svg class="seal__text" viewBox="0 0 120 120" aria-hidden="true"><text><textPath href="#seal-path" textLength="292" lengthAdjust="spacing">CERTIFIED ✚ 5-YEAR WARRANTY ✚ KANTON ✚</textPath></text></svg>
+          <i class="cross"></i>
+        </a>
+      </div>
+      <form class="form" data-form novalidate>
+        <label><span>Name</span><input name="name" autocomplete="name" required placeholder="Your name"></label>
+        <label><span>Phone</span><input name="phone" type="tel" autocomplete="tel" required placeholder="+994 50 000 00 00"></label>
+        <label><span>Dial</span>
+          <select name="dial" data-form-dial>
+            <option value="noir">Noir</option><option value="rouge">Rouge</option><option value="marine">Marine</option><option value="foret">Forêt</option><option value="blanc">Blanc</option>
+          </select>
+        </label>
+        <label><span>Strap</span>
+          <select name="strap" data-form-strap>
+            <option value="steel">Steel bracelet</option><option value="leather">Leather</option><option value="nato">NATO</option><option value="rubber" selected>Rubber</option>
+          </select>
+        </label>
+        <button class="btn" type="submit">Book a fitting</button>
+        <p class="form__ok" data-form-ok role="status" hidden>Thank you! We will call you back to pick a time.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__row">
+    <span><i class="cross"></i> KANTON</span>
+    <span>Concept demo. KANTON is a fictional brand.</span>
+    <span>Le Sentier · Baku</span>
+  </div>
+  <div class="footer__mark" aria-hidden="true"><i class="cross"></i><span>KANTON</span></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="js/stone.js"></script>
+<script src="js/watch.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/decor.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
