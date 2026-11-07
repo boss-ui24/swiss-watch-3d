@@ -190,7 +190,8 @@
     $$('.contours .stone, .reserve .stone').forEach((el) => gsap.fromTo(el, { yPercent: -6 }, {
       yPercent: 6, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
     }));
-    gsap.fromTo('.stone--black', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.straps', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+    // На телефоне камень стоит: масштаб от скролла менялся из скрипта с опозданием и тряс липкую сцену
+    if (fine) gsap.fromTo('.stone--black', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.straps', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
     // Активный пункт меню
     ['case', 'calibre', 'design', 'straps', 'dial'].forEach((id) => ScrollTrigger.create({

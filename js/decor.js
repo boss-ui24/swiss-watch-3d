@@ -50,7 +50,12 @@ window.KantonDecor = function (opts) {
   });
 
   /* ---------- Печати ---------- */
-  const seals = $$('.seal__text').map((el) => ({ el, a: Math.random() * 360 }));
+  // крутим только те, что на экране: лишние изменения во время скролла на телефоне трясут липкие секции
+  const seals = $$('.seal__text').map((el) => {
+    el.__on = !io;
+    if (io) io.observe(el);
+    return { el, a: Math.random() * 360 };
+  });
 
   /* ---------- Кольцо-шкала ---------- */
   const ring = $('[data-ring]'), ringScale = $('[data-ring-scale]'), ringSec = $('[data-ring-sec]');
@@ -172,7 +177,7 @@ window.KantonDecor = function (opts) {
       ticks.appendChild(t);
     }
   }
-  let trackH = 0, sectionTops = [], lastNum = '';
+  let trackH = 0, sectionTops = [], lastNum = '', lastHand = -1;
   function refresh(anchors) {
     const p = anchors && anchors.find((a) => a.name === 'profile');
     profileAt = p ? p.at : null;
@@ -182,7 +187,8 @@ window.KantonDecor = function (opts) {
   function updateTrack(y) {
     if (!track || !trackH) return;
     const max = ScrollTrigger.maxScroll(window) || 1;
-    hand.style.transform = `translate3d(0, ${(clamp(y / max, 0, 1) * trackH).toFixed(1)}px, 0)`;
+    const hy = Math.round(clamp(y / max, 0, 1) * trackH);
+    if (hy !== lastHand) { lastHand = hy; hand.style.transform = `translate3d(0, ${hy}px, 0)`; }
     let i = 0;
     while (i < sectionTops.length - 1 && sectionTops[i + 1] <= y + innerHeight * 0.5) i++;
     const n = String(i + 1).padStart(2, '0');
@@ -243,6 +249,7 @@ window.KantonDecor = function (opts) {
         L.track.style.transform = `translate3d(${(-p).toFixed(3)}%, 0, 0)`;
       }
       for (const S of seals) {
+        if (!S.el.__on) continue;
         S.a += dt * 18 * boost * dir;
         S.el.style.transform = `rotate(${S.a.toFixed(2)}deg)`;
       }
